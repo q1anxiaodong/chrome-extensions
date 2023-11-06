@@ -1,4 +1,4 @@
-# mainifast.json 字段释义
+# manifest.json 字段释义
 
 | 字段名 | 说明 |
 |-|-|  
@@ -126,6 +126,81 @@
   "default_locale": "zh_CN",
  
   // devtools页面入口,注意只能指向一个HTML文件,不能是JS文件
+  "devtools_page": "devtools.html"
+}
+```
+
+## manifest.json无注释版
+
+```json
+{
+  "manifest_version": 2,
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "简单的Chrome扩展demo",
+  
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
+
+  "background": {
+    "page": "background.html"
+  },
+
+  "browser_action": {
+    "default_icon": "img/icon.png",  
+    "default_title": "这是一个示例Chrome插件",
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/jquery-1.8.3.js", "js/content-script.js"],
+      "css": ["css/custom.css"],
+      "run_at": "document_start"
+    },
+
+    {
+      "matches": ["*://*/*.png", "*://*/*.jpg", "*://*/*.gif", "*://*/*.bmp"],
+      "js": ["js/show-image-content-size.js"]
+    }
+  ],
+
+  "permissions": [
+    "contextMenus", 
+    "tabs",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+
+  "web_accessible_resources": ["js/inject.js"],
+
+  "homepage_url": "https://www.baidu.com",
+
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+
+  "options_page": "options.html",
+
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+
+  "omnibox": {
+    "keyword" : "go"
+  },
+
+  "default_locale": "zh_CN",
+
   "devtools_page": "devtools.html"
 }
 ```
